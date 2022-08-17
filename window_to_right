@@ -1,7 +1,7 @@
 on get_dock_size()
-    tell application "System Events" to Â
-    tell application process "Dock" to Â
-        set {dockWidth, dockHeight} to Â
+    tell application "System Events" to ï¿½
+    tell application process "Dock" to ï¿½
+        set {dockWidth, dockHeight} to ï¿½
             the size of list 1
     return {dockWidth, dockHeight}
 end
@@ -14,9 +14,8 @@ on get_monitor_info()
 end
 
 on get_window()
-    global frontApp, frontAppName, windowTitle
+    global frontApp, frontAppName
 
-    set windowTitle to ""
     tell application "System Events"
         set frontApp to first application process whose frontmost is true
         set frontAppName to name of frontApp
