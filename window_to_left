@@ -8,6 +8,7 @@ on get_dock_size()
 end
 
 on get_monitor_info()
+    -- credit to Ronald Hofmann, Bo Persson @ https://stackoverflow.com/questions/1866912/applescript-how-to-get-current-display-resolution
     tell application "Finder"
         set screen_resolution to bounds of window of desktop
     end tell
@@ -15,6 +16,7 @@ on get_monitor_info()
 end
 
 on get_window()
+    -- credit to Albert @ https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title/5293758#5293758
     global frontApp, frontAppName
 
     tell application "System Events"
@@ -55,6 +57,7 @@ set windowPosition to {item 1 of dockSize + 10, menubarHeight}
 set this_app to get_window()
 set use_app to item 1 of this_app
 
+-- credit to regulus6633 @ https://stackoverflow.com/questions/5865989/positioning-a-window-with-applescript-using-dual-monitors/5871620#5871620
 tell application "System Events"
     tell process use_app
         set frontWindow to first window
