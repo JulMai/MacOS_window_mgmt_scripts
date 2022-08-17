@@ -1,4 +1,5 @@
 on get_dock_size()
+    -- credit to user3439894 @  https://apple.stackexchange.com/questions/409562/how-can-i-get-the-width-or-height-of-the-dock-in-mac-os-x-so-i-can-resize-a-wind
     tell application "System Events" to ï¿½
     tell application process "Dock" to ï¿½
         set {dockWidth, dockHeight} to ï¿½
