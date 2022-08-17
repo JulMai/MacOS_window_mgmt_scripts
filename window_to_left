@@ -1,0 +1,64 @@
+on get_dock_size()
+    tell application "System Events" to Â
+    tell application process "Dock" to Â
+        set {dockWidth, dockHeight} to Â
+            the size of list 1
+    return {dockWidth, dockHeight}
+end
+
+on get_monitor_info()
+    tell application "Finder"
+        set screen_resolution to bounds of window of desktop
+    end tell
+    return screen_resolution
+end
+
+on get_window()
+    global frontApp, frontAppName, windowTitle
+
+    set windowTitle to ""
+    tell application "System Events"
+        set frontApp to first application process whose frontmost is true
+        set frontAppName to name of frontApp
+        tell process frontAppName
+            tell (1st window whose value of attribute "AXMain" is true)
+                set windowTitle to value of attribute "AXTitle"
+            end tell
+        end tell
+    end tell
+
+    return {frontAppName, windowTitle}
+end
+
+
+set monitorInfo to get_monitor_info()
+
+set monitorSize to {item 3 of monitorInfo, item 4 of monitorInfo}
+log "Monitor-Size:"
+log monitorSize
+
+set monitorPosition to {item 1 of monitorInfo, item 2 of monitorInfo}
+log "Monitor-Pos:"
+log monitorPosition
+
+set dockSize to get_dock_size()
+log "Dock-Size:"
+log dockSize
+
+set menubarHeight to 0
+
+set windowWidth to (item 1 of monitorSize - item 1 of dockSize) / 2
+set windowHeight to (item 2 of monitorSize - menubarHeight)
+set windowSize to {windowWidth, windowHeight}
+set windowPosition to {item 1 of dockSize + 10, menubarHeight}
+
+set this_app to get_window()
+set use_app to item 1 of this_app
+
+tell application "System Events"
+    tell process use_app
+        set frontWindow to first window
+        set position of frontWindow to windowPosition
+        set size of frontWindow to windowSize
+    end tell
+end tell
